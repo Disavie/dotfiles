@@ -1,0 +1,168 @@
+// {
+//         "layer": "top",
+//         "ipc" : true,
+//         "position" : "top",
+//         "width" : "100%",
+//         "modules-left": ["sway/workspaces", "sway/mode"],
+//         "modules-center": ["clock"],
+//         "modules-right": ["network","battery"],
+//         "sway/window": {
+//             "max-length": 50
+//         },
+// 
+//         "battery": {
+//             "format": "{capacity}% {icon}",
+//             "format-icons": ["", "", "", "", ""]
+//         },
+//         "clock": {
+//             "format-alt": "{:%a, %d. %b  %H:%M}"
+//              
+//         },
+//         "network": {
+//             "format-alt": "%s"
+//         }
+// }
+{
+    "layer": "top",
+    "position": "top",
+    "mod": "dock",
+    "exclusive": true,
+    "gtk-layer-shell": true,
+    "margin-bottom": -1,
+    "passthrough": false,
+    "height": 16,
+    "modules-left": [
+        "custom/sshd",
+        "custom/tailscale",
+        "custom/rustdesk",
+        "custom/mywebsite"
+    ],
+    "modules-center": [
+        "sway/workspaces"
+    ],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "disk",
+        "pulseaudio",
+        "network",
+        "bluetooth",
+        "battery",
+        "clock"
+    ],
+    "cpu": {
+        "interval": 5,
+        "format": "  {usage}%",
+        "max-length": 10
+    },
+    "temperature": {
+        "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+        "input-filename": "temp2_input",
+        "critical-threshold": 75,
+        "tooltip": false,
+        "format-critical": "({temperatureC}°C)",
+        "format": "({temperatureC}°C)"
+    },
+    "disk": {
+        "interval": 30,
+        "format": "󰋊 {percentage_used}%",
+        "path": "/",
+        "tooltip": true,
+        "unit": "GB",
+        "tooltip-format":  "Available {free} of {total}"
+    },
+    "memory": {
+        "interval": 10,
+        "format": "  {percentage}%",
+        "max-length": 10,
+        "tooltip": true,
+        "tooltip-format": "RAM - {used:0.1f}GiB used"
+    },
+    "custom/sshd": {
+        "exec": "~/scripts/waybar-tray.sh sshd.service SSH",
+        "return-type": "json",
+        "interval": 5
+    },
+    "custom/tailscale": {
+        "exec": "~/scripts/waybar-tray.sh tailscaled.service Tailscale",
+        "return-type": "json",
+        "interval": 5
+    },
+    "custom/rustdesk": {
+        "exec": "~/scripts/waybar-tray.sh rustdesk.service rustdesk",
+        "return-type": "json",
+        "interval": 5
+    },
+    "custom/mywebsite": {
+        "exec": "~/scripts/website-status.sh https://davisstermer.com/home website",
+        "return-type": "json",
+        "interval": 5,
+        "on-click": "xdg-open https://davisstermer.com/home"
+    },
+    "clock": {
+        "format": "{:%R | %m\/%d\/%Y}",
+        "tooltip": false
+    },
+    "network": {
+        "format-wifi": " {icon}",
+        "format-ethernet": "  ",
+        "format-disconnected": "󰌙",
+        "tooltip" : true,
+        "tooltip-format": "{essid}\n{ifname}\n{ipaddr}",
+        "format-icons": [
+            "󰤯 ",
+            "󰤟 ",
+            "󰤢 ",
+            "󰤢 ",
+            "󰤨 "
+        ],
+        "on-click" : "foot -a nmtui nmtui"
+    },
+    "bluetooth":{
+      "format-bluetooth" : "{icon}",
+      "tooltip" : true,
+      "tooltip-format-on": "No device(s) connected",
+      "tooltip-format-connected": "{device_alias}",
+      "on-click" : "foot -a bluetui bluetui"
+      
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": [
+            "󰂎",
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹"
+        ]
+    },
+    "pulseaudio": {
+        "max-volume": 150,
+        "scroll-step": 10,
+        "format": "{icon}",
+        "tooltip-format": "{volume}%",
+        "format-muted": " ",
+        "format-icons": {
+            "default": [
+                " ",
+                " ",
+                " "
+            ]
+        },
+        "on-click": "pwvucontrol"
+    }
+}
