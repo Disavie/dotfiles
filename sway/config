@@ -3,6 +3,7 @@ workspace_layout stacking
 gaps outer 1
 gaps inner 1
 
+
 include /home/davis/.cache/wal/colors-sway
 
 default_border pixel 1
@@ -13,8 +14,8 @@ client.focused          $color2$f-alpha $color2$f-alpha $color15$f-alpha $color4
 client.unfocused        $color0$i-alpha $color0$i-alpha $color8$i-alpha  $color0$i-alpha $color0$i-alpha
 client.focused_inactive $color0$i-alpha $color0$i-alpha $color8$i-alpha  $color0$i-alpha $color0$i-alpha
 client.urgent           $color3$i-alpha $color3$i-alpha $color15$i-alpha $color3$i-alpha $color3$i-alpha
-corner_radius 10
-default_dim_inactive 0.05
+corner_radius 5
+default_dim_inactive 0.1
 
 
 # Read `man 5 sway` for a complete reference.
@@ -42,15 +43,14 @@ set $menu "rofi -show run"
 # Example configuration:
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-
 ### Idle configuration
 #
 # Example configuration:
 #
  exec swayidle -w \
-          timeout 180 'swaylock -f -c 000000' \
-          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           before-sleep 'swaylock -f -c 000000'
+          #timeout 180 'swaylock -f -c 000000' \
+          #timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -221,6 +221,33 @@ bar {
 }
 bindsym $mod+Shift+b exec "/home/davis/scripts/toggle-waybar.sh"
 
-include /etc/sway/config.d/*
-#exec swaybg -i "/home/davis/wallpapers/HVzzirDXoAAMeOC.jpg"
+bindsym $mod+Ctrl+r exec sh -c 'out=$(swaymsg -t get_outputs -r | jq -r ".[] | select(.focused) | .name"); rot=$(swaymsg -t get_outputs -r | jq -r ".[] | select(.focused) | .transform"); case "$rot" in normal) next=90 ;; 90) next=180 ;; 180) next=270 ;; 270) next=normal ;; esac; swaymsg output "$out" transform "$next"'
+
+
+blur enable
+blur_xray disable
+blur_radius 5
+blur_noise 0.05
+blur disable 
+#disable by default, opt in by appid
+
+
 exec ~/.config/sway/random-wallpaper.sh
+exec wl-gammarelay-rs
+exec_always sh -c 'sleep 1 && busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Gamma d .8'
+
+
+for_window [app_id="bluetui"] floating toggle
+for_window [app_id="pulsemixer"] floating toggle
+for_window [app_id="nmtui"] floating toggle
+for_window [app_id="foot"] blur enable 
+for_window [app_id="firefox"] blur enable 
+for_window [app_id="rofi"] blur enable 
+#The following protects blur on reload as well
+exec_always swaymsg '[app_id="firefox"] blur enable'
+exec_always swaymsg '[app_id="foot"] blur enable'
+exec_always swaymsg '[app_id="rofi"] blur enable'
+
+
+
+include /etc/sway/config.d/*

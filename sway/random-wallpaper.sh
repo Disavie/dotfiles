@@ -9,7 +9,7 @@ echo "Setting wallpaper: $WALLPAPER"
 # Output the Sway command
 pkill swaybg
 swaybg -i "$WALLPAPER" -m fill &
-wal -i "$WALLPAPER"
+wal -n -i "$WALLPAPER"
 
 
 

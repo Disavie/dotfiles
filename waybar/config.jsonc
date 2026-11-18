@@ -84,17 +84,17 @@
         "interval": 5
     },
     "custom/tailscale": {
-        "exec": "~/scripts/waybar-tray.sh tailscaled.service Tailscale",
+        "exec": "~/scripts/waybar-tray.sh tailscaled.service TS",
         "return-type": "json",
         "interval": 5
     },
     "custom/rustdesk": {
-        "exec": "~/scripts/waybar-tray.sh rustdesk.service rustdesk",
+        "exec": "~/scripts/waybar-tray.sh rustdesk.service RD",
         "return-type": "json",
         "interval": 5
     },
     "custom/mywebsite": {
-        "exec": "~/scripts/website-status.sh https://davisstermer.com/home website",
+        "exec": "~/scripts/website-status.sh https://davisstermer.com/home MyCloud",
         "return-type": "json",
         "interval": 5,
         "on-click": "xdg-open https://davisstermer.com/home"
@@ -163,6 +163,6 @@
                 " "
             ]
         },
-        "on-click": "pwvucontrol"
+      "on-click" : "foot -a pulsemixer pulsemixer"
     }
 }
