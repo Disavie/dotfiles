@@ -232,7 +232,8 @@ blur disable
 #disable by default, opt in by appid
 
 
-exec ~/.config/sway/random-wallpaper.sh
+#exec ~/.config/sway/random-wallpaper.sh
+exec sh -c '[ -f /tmp/sway-wallpaper-started ] || { touch /tmp/sway-wallpaper-started; ~/.config/sway/random-wallpaper.sh; }'
 exec wl-gammarelay-rs
 exec_always sh -c 'sleep 1 && busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Gamma d .8'
 
