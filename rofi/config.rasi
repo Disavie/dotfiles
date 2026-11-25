@@ -25,6 +25,7 @@ listview {
 }
 // Run Config
 configuration {
+    run-command: "/home/davis/.config/rofi/web-helper.sh '{cmd}'";
   run,drun {
     display-name: ">";
   }
