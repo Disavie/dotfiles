@@ -25,9 +25,14 @@ listview {
 }
 // Run Config
 configuration {
+    modes: "run,drun,websearch:/home/davis/.config/rofi/search.sh";
     run-command: "/home/davis/.config/rofi/web-helper.sh '{cmd}'";
   run,drun {
     display-name: ">";
+  }
+  websearch {
+    display-name: "b: >";
+    run-command: "/home/davis/.config/rofi/web-helper.sh '{cmd}'";
   }
 }
 // This just overwrites the setting in Monokai.rasi
