@@ -65,7 +65,7 @@ static const char unknown_str[] = "n/a";
  * wifi_perc           WiFi signal in percent          interface name (wlan0)
  */
 
-#define SEPERATOR { run_command, "%s", "echo \" | \""}, 
+#define SEPERATOR { run_command, "%s", "echo \"┃\""}, 
 
 static const struct arg args[] = {
 
@@ -83,7 +83,7 @@ static const struct arg args[] = {
 
     SEPERATOR
 
-    {cpu_perc, "CPU : %s%%", NULL},
+    {cpu_perc, "cpu : %s%%", NULL},
 
 	/* function format          argument */
     SEPERATOR
@@ -94,5 +94,5 @@ static const struct arg args[] = {
 
     SEPERATOR
 
-    { run_command , "%s", "date +\"%a, %e %H:%M\""},
+    {run_command , "%s", "date +\"%b %e, %I:%M:%S %p\""},
 };

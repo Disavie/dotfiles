@@ -25,16 +25,19 @@ listview {
 }
 // Run Config
 configuration {
-    modes: "run,drun,websearch:/home/davis/.config/rofi/search.sh";
+    modes: "run,drun,websearch:/home/davis/.config/rofi/search.sh,settings:/home/davis/scripts/launch-settings.sh";
 //    run-command: "/home/davis/.config/rofi/web-helper.sh '{cmd}'";
   run,drun {
     display-name: ">";
   }
   websearch {
     display-name: "b: >";
-    run-command: "/home/davis/.config/rofi/search.sh '{cmd}'";
+  }
+  settings {
+    display-name: "settings: >";
   }
 }
+
 // This just overwrites the setting in Monokai.rasi
 textbox-prompt-colon {
     str:        "";
