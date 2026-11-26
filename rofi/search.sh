@@ -1,4 +1,3 @@
-
 #!/bin/sh
 engine="duckduckgo"
 input="$1"

@@ -1,0 +1,31 @@
+#general.import = ["themes/gruvbox_light.toml"]
+
+[colors]
+transparent_background_colors = true
+
+[window]
+opacity = 0.8
+decorations = "none"
+
+[font]
+size = 9
+
+[font.normal]
+family = "Liberation Mono"
+style = "regular"
+
+[font.bold]
+family = "Liberation Mono"
+style = "bold"
+
+[cursor.style]
+blinking = "always"
+
+[terminal]
+osc52 =  "copypaste"
+
+[keyboard]
+bindings = [
+    { key = "Return", mods = "Super|Shift" , action = "SpawnNewInstance" },
+    #{ key = "Delete", keys = "\xb1[" },
+ ]
